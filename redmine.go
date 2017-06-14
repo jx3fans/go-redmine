@@ -318,6 +318,7 @@ type Issue struct {
 	Attachments    []*Attachment     `json:"attachments"`
 	Journals       []*IssueJournal   `json:"journals"`
 	Changesets     []*IssueChangeset `json:"changesets"`
+	Notes          string            `json:"notes"` // allows to leave comment next to changes
 	// TODO: watchers (since 2.3)
 }
 
@@ -384,6 +385,7 @@ type issue struct {
 	CategoryId     int            `json:"category_id,omitempty"`
 	CustomFields   []*customField `json:"custom_fields,omitempty"`
 	Uploads        []*Upload      `json:"uploads,omitempty"`
+	Notes          string         `json:"notes,omitempty"`
 }
 
 func (r *Issue) toSend(uploads []*Upload) *issue {
@@ -432,6 +434,7 @@ func (r *Issue) toSend(uploads []*Upload) *issue {
 		}
 	}
 	newIssue.Uploads = uploads
+	newIssue.Notes = r.Notes
 	return newIssue
 }
 
