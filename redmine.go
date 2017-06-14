@@ -247,6 +247,9 @@ func (c *UploadsUploadCall) Do() (string, error) {
 	body := new(bytes.Buffer)
 	body.Write(c.data)
 	urlStr := resolveRelative(c.s.baseUrl, "uploads.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	req, _ := http.NewRequest("POST", urlStr, body)
 	c.s.auth.SetAuth(req)
 	req.Header.Set("Content-Type", "application/octet-stream")
@@ -482,6 +485,9 @@ func (c *IssuesListCall) Do() (*IssueFeed, error) {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "issues.json")
 	urlStr += "?" + params.Encode()
+
+	fmt.Println("最终请求链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -562,6 +568,9 @@ func (c *IssuesGetCall) Do() (*Issue, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "issues/{issueId}.json")
 	urlStr = strings.Replace(urlStr, "{issueId}", strconv.Itoa(c.issueId), 1)
 	urlStr += "?" + params.Encode()
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -602,6 +611,9 @@ func (c *IssuesInsertCall) Do() (*Issue, error) {
 		return nil, err
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "issues.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("POST", urlStr, body)
 	if err != nil {
 		return nil, err
@@ -642,6 +654,9 @@ func (c *IssuesUpdateCall) Do() error {
 		return err
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "issues/{issueId}.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	urlStr = strings.Replace(urlStr, "{issueId}", strconv.Itoa(c.issue.Id), 1)
 	_, err = c.s.doRequest("PUT", urlStr, body)
 	return err
@@ -663,6 +678,9 @@ func (r *IssuesService) Delete(issueId int) *IssuesDeleteCall {
 func (c *IssuesDeleteCall) Do() error {
 	urlStr := resolveRelative(c.s.baseUrl, "issues/{issueId}.json")
 	urlStr = strings.Replace(urlStr, "{issueId}", strconv.Itoa(c.issueId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err := c.s.doRequest("DELETE", urlStr, nil)
 	return err
 }
@@ -757,6 +775,9 @@ func (c *ProjectsListCall) Do() (*ProjectFeed, error) {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "projects.json")
 	urlStr += "?" + params.Encode()
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -815,6 +836,9 @@ func (c *ProjectsGetCall) Do() (*Project, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "projects/{projectId}.json")
 	urlStr = strings.Replace(urlStr, "{projectId}", strconv.Itoa(c.projectId), 1)
 	urlStr += "?" + params.Encode()
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -854,6 +878,9 @@ func (c *ProjectsInsertCall) Do() (*Project, error) {
 		return nil, err
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "projects.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("POST", urlStr, body)
 	if err != nil {
 		return nil, err
@@ -894,6 +921,9 @@ func (c *ProjectsUpdateCall) Do() error {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "projects/{projectId}.json")
 	urlStr = strings.Replace(urlStr, "{projectId}", strconv.Itoa(c.project.Id), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err = c.s.doRequest("PUT", urlStr, body)
 	return err
 }
@@ -914,6 +944,9 @@ func (r *ProjectsService) Delete(projectId int) *ProjectsDeleteCall {
 func (c *ProjectsDeleteCall) Do() error {
 	urlStr := resolveRelative(c.s.baseUrl, "projects/{projectId}.json")
 	urlStr = strings.Replace(urlStr, "{projectId}", strconv.Itoa(c.projectId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err := c.s.doRequest("DELETE", urlStr, nil)
 	return err
 }
@@ -1000,6 +1033,9 @@ func (c *MembershipsListCall) Do() (*MembershipFeed, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "projects/{projectId}/memberships.json")
 	urlStr = strings.Replace(urlStr, "{projectId}", strconv.Itoa(c.projectId), 1)
 	urlStr += "?" + params.Encode()
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -1028,6 +1064,9 @@ func (r *MembershipsService) Get(membershipId int) *MembershipsGetCall {
 func (c *MembershipsGetCall) Do() (*Membership, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "memberships/{membershipId}.json")
 	urlStr = strings.Replace(urlStr, "{membershipId}", strconv.Itoa(c.membershipId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -1068,6 +1107,9 @@ func (c *MembershipsInsertCall) Do() (*Membership, error) {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "projects/{projectId}/memberships.json")
 	urlStr = strings.Replace(urlStr, "{projectId}", strconv.Itoa(c.membership.Project.Id), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("POST", urlStr, body)
 	if err != nil {
 		return nil, err
@@ -1108,6 +1150,9 @@ func (c *MembershipsUpdateCall) Do() error {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "memberships/{membershipId}.json")
 	urlStr = strings.Replace(urlStr, "{membershipId}", strconv.Itoa(c.membership.Id), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err = c.s.doRequest("PUT", urlStr, body)
 	return err
 }
@@ -1128,6 +1173,9 @@ func (r *MembershipsService) Delete(membershipId int) *MembershipsDeleteCall {
 func (c *MembershipsDeleteCall) Do() error {
 	urlStr := resolveRelative(c.s.baseUrl, "memberships/{membershipId}.json")
 	urlStr = strings.Replace(urlStr, "{membershipId}", strconv.Itoa(c.membershipId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err := c.s.doRequest("DELETE", urlStr, nil)
 	return err
 }
@@ -1226,6 +1274,9 @@ func (c *UsersListCall) Do() (*UserFeed, error) {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "users.json")
 	urlStr += "?" + params.Encode()
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -1284,6 +1335,9 @@ func (c *UsersGetCall) Do() (*User, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "users/{userId}.json")
 	urlStr = strings.Replace(urlStr, "{userId}", strconv.Itoa(c.userId), 1)
 	urlStr += "?" + params.Encode()
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -1323,6 +1377,9 @@ func (c *UsersInsertCall) Do() (*User, error) {
 		return nil, err
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "users.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("POST", urlStr, body)
 	if err != nil {
 		return nil, err
@@ -1363,6 +1420,9 @@ func (c *UsersUpdateCall) Do() error {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "users/{userId}.json")
 	urlStr = strings.Replace(urlStr, "{userId}", strconv.Itoa(c.user.Id), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err = c.s.doRequest("PUT", urlStr, body)
 	return err
 }
@@ -1383,6 +1443,9 @@ func (r *UsersService) Delete(userId int) *UsersDeleteCall {
 func (c *UsersDeleteCall) Do() error {
 	urlStr := resolveRelative(c.s.baseUrl, "users/{userId}.json")
 	urlStr = strings.Replace(urlStr, "{userId}", strconv.Itoa(c.userId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err := c.s.doRequest("DELETE", urlStr, nil)
 	return err
 }
@@ -1487,6 +1550,9 @@ func (c *TimeEntriesListCall) Do() (*TimeEntryFeed, error) {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "time_entries.json")
 	urlStr += "?" + params.Encode()
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -1515,6 +1581,9 @@ func (r *TimeEntriesService) Get(timeEntryId int) *TimeEntriesGetCall {
 func (c *TimeEntriesGetCall) Do() (*TimeEntry, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "time_entries/{timeEntryId}.json")
 	urlStr = strings.Replace(urlStr, "{timeEntryId}", strconv.Itoa(c.timeEntryId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -1554,6 +1623,9 @@ func (c *TimeEntriesInsertCall) Do() (*TimeEntry, error) {
 		return nil, err
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "time_entries.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("POST", urlStr, body)
 	if err != nil {
 		return nil, err
@@ -1594,6 +1666,9 @@ func (c *TimeEntriesUpdateCall) Do() error {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "time_entries/{timeEntryId}.json")
 	urlStr = strings.Replace(urlStr, "{timeEntryId}", strconv.Itoa(c.timeEntry.Id), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err = c.s.doRequest("PUT", urlStr, body)
 	return err
 }
@@ -1614,6 +1689,9 @@ func (r *TimeEntriesService) Delete(timeEntryId int) *TimeEntriesDeleteCall {
 func (c *TimeEntriesDeleteCall) Do() error {
 	urlStr := resolveRelative(c.s.baseUrl, "time_entries/{timeEntryId}.json")
 	urlStr = strings.Replace(urlStr, "{timeEntryId}", strconv.Itoa(c.timeEntryId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err := c.s.doRequest("DELETE", urlStr, nil)
 	return err
 }
@@ -1686,6 +1764,9 @@ func (c *NewsListCall) Do() (*NewsFeed, error) {
 		urlStr = strings.Replace(urlStr, "{projectId}", strconv.Itoa(c.projectId), 1)
 	}
 	urlStr += "?" + params.Encode()
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -1740,6 +1821,9 @@ func (r *RelationsService) List(issueId int) *RelationsListCall {
 func (c *RelationsListCall) Do() ([]*Relation, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "issues/{issueId}/relations.json")
 	urlStr = strings.Replace(urlStr, "{issueId}", strconv.Itoa(c.issueId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -1770,6 +1854,9 @@ func (r *RelationsService) Get(relationId int) *RelationsGetCall {
 func (c *RelationsGetCall) Do() (*Relation, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "relations/{relationId}.json")
 	urlStr = strings.Replace(urlStr, "{relationId}", strconv.Itoa(c.relationId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -1810,6 +1897,9 @@ func (c *RelationsInsertCall) Do() (*Relation, error) {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "issues/{issueId}/relations.json")
 	urlStr = strings.Replace(urlStr, "{issueId}", strconv.Itoa(c.relation.IssueId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("POST", urlStr, body)
 	if err != nil {
 		return nil, err
@@ -1840,6 +1930,9 @@ func (r *RelationsService) Delete(relationId int) *RelationsDeleteCall {
 func (c *RelationsDeleteCall) Do() error {
 	urlStr := resolveRelative(c.s.baseUrl, "relations/{relationId}.json")
 	urlStr = strings.Replace(urlStr, "{relationId}", strconv.Itoa(c.relationId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err := c.s.doRequest("DELETE", urlStr, nil)
 	return err
 }
@@ -1907,6 +2000,9 @@ func (r *VersionsService) List(projectId int) *VersionsListCall {
 func (c *VersionsListCall) Do() ([]*Version, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "projects/{projectId}/versions.json")
 	urlStr = strings.Replace(urlStr, "{projectId}", strconv.Itoa(c.projectId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -1938,6 +2034,9 @@ func (r *VersionsService) Get(versionId int) *VersionsGetCall {
 func (c *VersionsGetCall) Do() (*Version, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "versions/{versionId}.json")
 	urlStr = strings.Replace(urlStr, "{versionId}", strconv.Itoa(c.versionId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -1978,6 +2077,9 @@ func (c *VersionsInsertCall) Do() (*Version, error) {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "projects/{versionId}/versions.json")
 	urlStr = strings.Replace(urlStr, "{versionId}", strconv.Itoa(c.version.Project.Id), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("POST", urlStr, body)
 	if err != nil {
 		return nil, err
@@ -2018,6 +2120,9 @@ func (c *VersionsUpdateCall) Do() error {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "versions/{versionId}.json")
 	urlStr = strings.Replace(urlStr, "{versionId}", strconv.Itoa(c.version.Id), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err = c.s.doRequest("PUT", urlStr, body)
 	return err
 }
@@ -2038,6 +2143,9 @@ func (r *VersionsService) Delete(versionId int) *VersionsDeleteCall {
 func (c *VersionsDeleteCall) Do() error {
 	urlStr := resolveRelative(c.s.baseUrl, "versions/{versionId}.json")
 	urlStr = strings.Replace(urlStr, "{versionId}", strconv.Itoa(c.versionId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err := c.s.doRequest("DELETE", urlStr, nil)
 	return err
 }
@@ -2089,6 +2197,9 @@ func (r *WikiService) List(projectId int) *WikiListCall {
 func (c *WikiListCall) Do() ([]*WikiPage, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "projects/{projectId}/wiki/index.json")
 	urlStr = strings.Replace(urlStr, "{projectId}", strconv.Itoa(c.projectId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2173,6 +2284,9 @@ func (c *WikiGetCall) Do() (*WikiPage, error) {
 	urlStr = strings.Replace(urlStr, "{projectId}", strconv.Itoa(c.projectId), 1)
 	urlStr = strings.Replace(urlStr, "{title}", c.title, 1)
 	urlStr += "?" + params.Encode()
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2215,6 +2329,9 @@ func (c *WikiUpdateCall) Do() error {
 	urlStr := resolveRelative(c.s.baseUrl, "projects/{projectId}/wiki/{title}.json")
 	urlStr = strings.Replace(urlStr, "{projectId}", strconv.Itoa(c.projectId), 1)
 	urlStr = strings.Replace(urlStr, "{title}", c.wikiPage.Title, 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err = c.s.doRequest("PUT", urlStr, body)
 	return err
 }
@@ -2237,6 +2354,9 @@ func (c *WikiDeleteCall) Do() error {
 	urlStr := resolveRelative(c.s.baseUrl, "projects/{projectId}/wiki/{title}.json")
 	urlStr = strings.Replace(urlStr, "{projectId}", strconv.Itoa(c.projectId), 1)
 	urlStr = strings.Replace(urlStr, "{title}", c.title, 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err := c.s.doRequest("DELETE", urlStr, nil)
 	return err
 }
@@ -2294,6 +2414,9 @@ func (c *QueriesListCall) Do() (*QueryFeed, error) {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "queries.json")
 	urlStr += "?" + params.Encode()
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2337,6 +2460,9 @@ func (r *AttachmentsService) Get(attachmentId int) *AttachmentsGetCall {
 func (c *AttachmentsGetCall) Do() (*Attachment, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "attachments/{attachmentId}.json")
 	urlStr = strings.Replace(urlStr, "{attachmentId}", strconv.Itoa(c.attachmentId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2376,6 +2502,9 @@ func (r *IssueStatusesService) List() *IssueStatusesListCall {
 
 func (c *IssueStatusesListCall) Do() ([]*IssueStatus, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "issue_statuses.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2413,6 +2542,9 @@ func (r *TrackersService) List() *TrackersListCall {
 
 func (c *TrackersListCall) Do() ([]*Tracker, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "trackers.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2451,6 +2583,9 @@ func (r *DocumentCategoriesService) List() *DocumentCategoriesListCall {
 
 func (c *DocumentCategoriesListCall) Do() ([]*Enumeration, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "enumerations/document_categories.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2479,6 +2614,9 @@ func (r *IssuePrioritiesService) List() *IssuePrioritiesListCall {
 
 func (c *IssuePrioritiesListCall) Do() ([]*Enumeration, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "enumerations/issue_priorities.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2507,6 +2645,9 @@ func (r *TimeEntryActivitiesService) List() *TimeEntryActivitiesListCall {
 
 func (c *TimeEntryActivitiesListCall) Do() ([]*Enumeration, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "enumerations/time_entry_activities.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2562,6 +2703,9 @@ func (r *IssueCategoriesService) List(projectId int) *IssueCategoriesListCall {
 func (c *IssueCategoriesListCall) Do() ([]*IssueCategory, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "projects/{projectId}/issue_categories.json")
 	urlStr = strings.Replace(urlStr, "{projectId}", strconv.Itoa(c.projectId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2593,6 +2737,9 @@ func (r *IssueCategoriesService) Get(issueCategoryId int) *IssueCategoriesGetCal
 func (c *IssueCategoriesGetCall) Do() (*IssueCategory, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "issue_categories/{issueCategoryId}.json")
 	urlStr = strings.Replace(urlStr, "{issueCategoryId}", strconv.Itoa(c.issueCategoryId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2633,6 +2780,9 @@ func (c *IssueCategoriesInsertCall) Do() (*IssueCategory, error) {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "projects/{projectId}/issue_categories.json")
 	urlStr = strings.Replace(urlStr, "{projectId}", strconv.Itoa(c.issueCategory.Project.Id), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("POST", urlStr, body)
 	if err != nil {
 		return nil, err
@@ -2673,6 +2823,9 @@ func (c *IssueCategoriesUpdateCall) Do() error {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "issue_categories/{issueCategoryId}.json")
 	urlStr = strings.Replace(urlStr, "{issueCategoryId}", strconv.Itoa(c.issueCategory.Id), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err = c.s.doRequest("PUT", urlStr, body)
 	return err
 }
@@ -2707,6 +2860,9 @@ func (c *IssueCategoriesDeleteCall) Do() error {
 	urlStr := resolveRelative(c.s.baseUrl, "issue_categories/{issueCategoryId}.json")
 	urlStr = strings.Replace(urlStr, "{issueCategoryId}", strconv.Itoa(c.issueCategoryId), 1)
 	urlStr += "?" + params.Encode()
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err := c.s.doRequest("DELETE", urlStr, nil)
 	return err
 }
@@ -2735,6 +2891,9 @@ func (r *RolesService) List() *RolesListCall {
 
 func (c *RolesListCall) Do() ([]*Role, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "roles.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2765,6 +2924,9 @@ func (r *RolesService) Get(roleId int) *RolesGetCall {
 func (c *RolesGetCall) Do() (*Role, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "roles/{roleId}.json")
 	urlStr = strings.Replace(urlStr, "{roleId}", strconv.Itoa(c.roleId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2838,6 +3000,9 @@ func (r *GroupsService) List() *GroupsListCall {
 
 func (c *GroupsListCall) Do() ([]*Group, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "groups.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2898,6 +3063,9 @@ func (c *GroupsGetCall) Do() (*Group, error) {
 	urlStr := resolveRelative(c.s.baseUrl, "groups/{groupId}.json")
 	urlStr = strings.Replace(urlStr, "{groupId}", strconv.Itoa(c.groupId), 1)
 	urlStr += "?" + params.Encode()
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("GET", urlStr, nil)
 	if err != nil {
 		return nil, err
@@ -2937,6 +3105,9 @@ func (c *GroupsInsertCall) Do() (*Group, error) {
 		return nil, err
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "groups.json")
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	data, err := c.s.doRequest("POST", urlStr, body)
 	if err != nil {
 		return nil, err
@@ -2977,6 +3148,9 @@ func (c *GroupsUpdateCall) Do() error {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "groups/{groupId}.json")
 	urlStr = strings.Replace(urlStr, "{groupId}", strconv.Itoa(c.group.Id), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err = c.s.doRequest("PUT", urlStr, body)
 	return err
 }
@@ -2997,6 +3171,9 @@ func (r *GroupsService) Delete(groupId int) *GroupsDeleteCall {
 func (c *GroupsDeleteCall) Do() error {
 	urlStr := resolveRelative(c.s.baseUrl, "groups/{groupId}.json")
 	urlStr = strings.Replace(urlStr, "{groupId}", strconv.Itoa(c.groupId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err := c.s.doRequest("DELETE", urlStr, nil)
 	return err
 }
@@ -3028,6 +3205,9 @@ func (c *GroupsAddUserCall) Do() error {
 	}
 	urlStr := resolveRelative(c.s.baseUrl, "groups/{groupId}/users.json")
 	urlStr = strings.Replace(urlStr, "{groupId}", strconv.Itoa(c.groupId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err = c.s.doRequest("POST", urlStr, body)
 	return err
 }
@@ -3050,6 +3230,9 @@ func (c *GroupsRemoveUserCall) Do() error {
 	urlStr := resolveRelative(c.s.baseUrl, "groups/{groupId}/users/{userId}.json")
 	urlStr = strings.Replace(urlStr, "{groupId}", strconv.Itoa(c.groupId), 1)
 	urlStr = strings.Replace(urlStr, "{userId}", strconv.Itoa(c.userId), 1)
+
+	fmt.Println("最终的链接为：" + urlStr)
+
 	_, err := c.s.doRequest("DELETE", urlStr, nil)
 	return err
 }
